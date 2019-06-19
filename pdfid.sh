@@ -8,14 +8,12 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 git config --global user.email "$GITLAB_USER_EMAIL"
 git config --global user.name  "$GITLAB_USER_ID"
 #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
-echo "$GITLAB_USER_EMAIL"
-echo "$GITLAB_USER_ID"
-echo "$SSH_PRIV_KEY" | tail
 
 SAMPLESPATH=$(pwd)
 ls $SAMPLESPATH/pdf-source/ -R
 mkdir -p $SAMPLESPATH/output-files/results
-# Do nothing if folder is empty
+cd $SAMPLESPATH/output-files
+git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 number_of_files=$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)
 if [[ "$number_of_files" == 0 ]]; then
 	echo "Folder is empty"
@@ -45,7 +43,7 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	#ls $SAMPLESPATH/output-files
+	ls $SAMPLESPATH/output-files
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
@@ -58,10 +56,8 @@ else
 	echo "number of samples: $number_of_files" | tee -a $SAMPLESPATH/pdfid.log
 
 	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
-  ls -R
   git init
-  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	git add .
 	git commit -m "[skip ci] update pdfid results"
-  git status
+  git push origin HEAD:master
 fi

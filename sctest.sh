@@ -17,6 +17,8 @@ ORIGSAMPLESPATH=$(pwd)
  if [[ "$(ls $ORIGSAMPLESPATH/results/shellcode |wc -l)" == 0 ]]; then
 	echo "Folder is empty"
 else
+  mkdir $SAMPLESPATH/output-files/results
+  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	for folder in $ORIGSAMPLESPATH/results/shellcode/*/
 	  do
 	    printf "Working on folder: "${folder}"\n" >> $OUTPUTPATH/sctest_log
@@ -37,7 +39,7 @@ else
 	# Update git
 	cat $OUTPUTPATH/sctest_log
 	cd $ORIGSAMPLESPATH/output-files
-  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	git add .
 	git commit -m "[skip ci] Results update"
+  git push origin HEAD:master
 fi

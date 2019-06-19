@@ -16,6 +16,9 @@ cd /jsunpack-n
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
+  mkdir -p $SAMPLESPATH/output-files/results
+  cd $SAMPLESPATH/output-files
+  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	for file in $SAMPLESPATH/pdf-source/pdf/*
 	  do
 	  echo "Processing $file ..."
@@ -26,8 +29,8 @@ else
 	done
 
 	cd $SAMPLESPATH/output-files
-  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
+  git push origin HEAD:master
 fi
 
