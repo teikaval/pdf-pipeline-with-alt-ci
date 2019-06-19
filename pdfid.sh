@@ -7,7 +7,9 @@ echo "$SSH_PRIV_KEY" | ssh-add -
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 git config --global user.email "$GITLAB_USER_EMAIL"
 git config --global user.name  "$GITLAB_USER_ID"
+echo "b4 remote"
 git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+echo "after remote"
 
 SAMPLESPATH=$(pwd)
 ls $SAMPLESPATH/pdf-source/ -R
@@ -44,7 +46,7 @@ else
 	cd $SAMPLESPATH
 	ls $SAMPLESPATH
 	#git clone results output-files
-
+  echo "b4 output-files"
 	cd $SAMPLESPATH/output-files
 
 	printf "\n------------------------\n\n"
@@ -55,6 +57,7 @@ else
 	echo "number of samples: $number_of_files" | tee -a $SAMPLESPATH/pdfid.log
 
 	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
+  git init
 	git add .
 	git commit -m "[skip ci] update pdfid results"
 fi
