@@ -8,7 +8,7 @@ before_script:
   - git config --global user.email "$GITLAB_USER_EMAIL"
   - git config --global user.name  "$GITLAB_USER_ID"
   - git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
-  - "ending before script..."
+  - echo "ending before script..."
 
 stages:
   - stage-0-list-files
