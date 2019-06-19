@@ -30,8 +30,10 @@ pdfid:
     name: cincan/pdfid
     entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
   script:
+    - echo "11111111111111"
     #    - docker pull cincan/pdfid
-    - /bin/sh pdfid.sh
+    - /bin/bash pdfid.sh
+    - echo "222222222222222"
   only:
     - pdf-source
   artifacts:
@@ -43,8 +45,10 @@ peepdf-virustotal-check:
     name: cincan/peepdf
     entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
   script:
+    - echo "111111111111"
     #- docker pull cincan/peepdf
     - /bin/bash peepdf-vt.sh
+    - echo "222222222222"
   artifacts:
     name: output-files
   only:
@@ -55,12 +59,14 @@ jsunpackn:
   dependencies: [pdfid]
   image: 
     name: cincan/jsunpack-n
-    entrypoint: ["/usr/bin/python","/jsunpackn.py"]
+    entrypoint: ["/usr/bin/python","/jsunpack-n/jsunpackn.py"]
   script:
     #    - apk add --no-cache python3
     #- apt-get install python3
-    - docker pull cincan/jsunpack-n
+    #- docker pull cincan/jsunpack-n
+    - echo "1111111111111111111"
     - /bin/bash jsunpackn.sh
+    - echo "222222222222222222"
   artifacts:
     name: output-files
   only:
