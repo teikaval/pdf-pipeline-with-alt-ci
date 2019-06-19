@@ -49,10 +49,10 @@ peepdf-virustotal-check:
     name: cincan/peepdf
     #  entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
     entrypoint: ["/usr/bash"]
-    script:
+  script:
       #- docker pull cincan/peepdf
       #- /bin/bash peepdf-vt.sh
-      - docker run -v ${PWD}/pdf:/pdf-source/pdf cincan/peepdf peepdf-vt.sh
+    - docker run -v ${PWD}/pdf:/pdf-source/pdf cincan/peepdf peepdf-vt.sh
   artifacts:
     name: output-files
   only:
