@@ -1,7 +1,7 @@
 #!/bin/bash
 #git clone results output-files
 SAMPLESPATH=$(pwd)
-#cd /jsunpack-n
+cd /jsunpack-n
 
 #if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 if [[ "$(ls $SAMPLESPATH/pdf |wc -l)" == 0 ]]; then  
@@ -14,8 +14,8 @@ else
 	  xbase=${file##*/};xfext=${xbase##*.};xpref=${xbase%.*}
 	  #/usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/
     cd $SAMPLESPATH/pdf
-    docker run -v ${SAMPLESPATH}:/jsunpack-n/ cincan/jsunpack-n /jsunpack-n/${xbase} 
-    #/usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/shellcode/${xpref}.${xfext}/
+    #docker run -v ${SAMPLESPATH}:/jsunpack-n/ cincan/jsunpack-n /jsunpack-n/${xbase} 
+    /usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/shellcode/${xpref}.${xfext}/
 	  #echo "output folder: $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/"
 	  echo "output folder: $SAMPLESPATH/shellcode/${xpref}.${xfext}/"
 	done

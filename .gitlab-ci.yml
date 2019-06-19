@@ -7,10 +7,9 @@ before_script:
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIV_KEY" | ssh-add -
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-  - git config --global user.email "$GITLAB_USER_EMAIL"
-  - git config --global user.name  "$GITLAB_USER_ID"
-  - git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
-  - echo "ending before script..."
+    #- git config --global user.email "$GITLAB_USER_EMAIL"
+    #- git config --global user.name  "$GITLAB_USER_ID"
+    #- git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 
 services:
   - docker:dind
@@ -37,7 +36,7 @@ pdfid:
   #  entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
   script:
     - docker pull cincan/pdfid
-    - /bin/bash pdfid.sh
+    - docker run -v /bin/bash pdfid.sh
   only:
     - pdf-source
   artifacts:

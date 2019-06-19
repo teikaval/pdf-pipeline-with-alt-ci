@@ -16,8 +16,8 @@ else
     xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
     echo Analysing: ${file##*/}
 
-	  #/usr/bin/python peepdf.py $file -f -c  | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" > result
-	  docker run cincan/peepdf $file -f -c | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" > result
+	  /usr/bin/python peepdf.py $file -f -c  | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" > result
+	  #docker run cincan/peepdf $file -f -c | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" > result
 		cat result | tee -a $SAMPLESPATH/peepdf.log 
 	done
 
