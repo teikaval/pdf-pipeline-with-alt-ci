@@ -8,6 +8,7 @@ before_script:
   - git config --global user.email "$GITLAB_USER_EMAIL"
   - git config --global user.name  "$GITLAB_USER_ID"
   - git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+  - "ending before script..."
 
 stages:
   - stage-0-list-files
@@ -30,10 +31,8 @@ pdfid:
     name: cincan/pdfid
     entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
   script:
-    - echo "11111111111111"
     #    - docker pull cincan/pdfid
     - /bin/bash pdfid.sh
-    - echo "222222222222222"
   only:
     - pdf-source
   artifacts:
@@ -45,10 +44,8 @@ peepdf-virustotal-check:
     name: cincan/peepdf
     entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
   script:
-    - echo "111111111111"
     #- docker pull cincan/peepdf
     - /bin/bash peepdf-vt.sh
-    - echo "222222222222"
   artifacts:
     name: output-files
   only:
@@ -64,9 +61,7 @@ jsunpackn:
     #    - apk add --no-cache python3
     #- apt-get install python3
     #- docker pull cincan/jsunpack-n
-    - echo "1111111111111111111"
     - /bin/bash jsunpackn.sh
-    - echo "222222222222222222"
   artifacts:
     name: output-files
   only:
