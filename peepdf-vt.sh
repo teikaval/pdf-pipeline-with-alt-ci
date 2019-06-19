@@ -13,6 +13,7 @@ SAMPLESPATH=$(pwd)
 mkdir -p ${SAMPLESPATH}/output-files/results
 cd $SAMPLESPATH/output-files
 git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+git pull origin master
 ls $SAMPLESPATH/pdf-source/ -R
 
 # Do nothing if folder is empty
@@ -32,7 +33,6 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	ls $SAMPLESPATH -R
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files

@@ -14,6 +14,7 @@ ls $SAMPLESPATH/pdf-source/ -R
 mkdir -p $SAMPLESPATH/output-files/results
 cd $SAMPLESPATH/output-files
 git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+git pull origin master
 number_of_files=$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)
 if [[ "$number_of_files" == 0 ]]; then
 	echo "Folder is empty"
@@ -43,7 +44,7 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	ls $SAMPLESPATH/output-files
+	ls $SAMPLESPATH/output-files -R
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
@@ -56,7 +57,6 @@ else
 	echo "number of samples: $number_of_files" | tee -a $SAMPLESPATH/pdfid.log
 
 	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
-  git init
 	git add .
 	git commit -m "[skip ci] update pdfid results"
   git push origin HEAD:master
