@@ -12,6 +12,7 @@ git config --global user.name  "$GITLAB_USER_ID"
 SAMPLESPATH=$(pwd)
 mkdir -p ${SAMPLESPATH}/output-files/results
 cd $SAMPLESPATH/output-files
+git init
 git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master

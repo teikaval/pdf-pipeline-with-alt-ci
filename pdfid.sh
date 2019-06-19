@@ -14,6 +14,7 @@ ls $SAMPLESPATH/pdf-source/ -R
 mkdir -p $SAMPLESPATH/output-files/results
 cd $SAMPLESPATH/output-files
 #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+git init
 git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master
 number_of_files=$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)
