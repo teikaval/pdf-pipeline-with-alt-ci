@@ -12,7 +12,8 @@ git config --global user.name  "$GITLAB_USER_ID"
 SAMPLESPATH=$(pwd)
 mkdir -p ${SAMPLESPATH}/output-files/results
 cd $SAMPLESPATH/output-files
-git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+#git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master
 ls $SAMPLESPATH/pdf-source/ -R
 
@@ -42,7 +43,7 @@ else
 	#git config --global user.name "cincan-pipeline"
 	#git config --global user.email "cincan@concourse"
 	git commit -m "[skip ci] update peepdf results"
-  git push origin HEAD:master
+  git push -u origin master
 fi
 
 

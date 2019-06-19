@@ -17,7 +17,8 @@ if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then
 else
   mkdir -p $SAMPLESPATH/output-files/results
   cd $SAMPLESPATH/output-files
-  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+  git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+  #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   git pull origin master
   cd /jsunpack-n
 	for file in $SAMPLESPATH/pdf-source/pdf/*
@@ -32,6 +33,6 @@ else
 	cd $SAMPLESPATH/output-files
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
-  git push origin HEAD:master
+  git push -u origin master
 fi
 
