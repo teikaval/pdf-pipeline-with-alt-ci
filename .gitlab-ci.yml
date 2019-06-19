@@ -10,6 +10,9 @@ before_script:
   - git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   - echo "ending before script..."
 
+services:
+  - docker:dind
+
 stages:
   - stage-0-list-files
   - stage-1-scan
