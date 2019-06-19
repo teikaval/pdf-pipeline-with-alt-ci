@@ -48,7 +48,7 @@ peepdf-virustotal-check:
   #image: 
   #  name: cincan/peepdf
     #  entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
-    entrypoint: ["/usr/bash"]
+    #  entrypoint: ["/usr/bash"]
   script:
     - docker pull cincan/peepdf
       #- /bin/bash peepdf-vt.sh
