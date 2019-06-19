@@ -1,8 +1,8 @@
 image: docker:git
 
 before_script:
-  #  - apk add --update openssh-client bash git
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - apk add --update openssh-client bash git
+  #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIV_KEY" | ssh-add -
