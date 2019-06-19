@@ -7,7 +7,7 @@ echo "$SSH_PRIV_KEY" | ssh-add -
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 git config --global user.email "$GITLAB_USER_EMAIL"
 git config --global user.name  "$GITLAB_USER_ID"
-git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+#git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 
 #git clone results output-files
 SAMPLESPATH=$(pwd)
@@ -26,6 +26,7 @@ else
 	done
 
 	cd $SAMPLESPATH/output-files
+  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
 fi
