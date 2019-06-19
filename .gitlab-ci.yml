@@ -33,11 +33,11 @@ pdfid:
   stage: stage-1-scan
   #image: 
   # name: cincan/pdfid
-    #entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
-    # entrypoint: ["/bin/sh"]
+  #entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
+  # entrypoint: ["/bin/sh"]
   script:
     - docker pull cincan/pdfid
-    - docker run -v ${PWD}/pdf:/pdf-source/pdf --entrypoint "/bin/sh" cincan/pdfid pdfid.sh
+    - docker run -v ${PWD}:/pdf-source --entrypoint "/bin/sh" cincan/pdfid /pdf-source/pdfid.sh
   only:
     - pdf-source
   artifacts:
@@ -52,7 +52,7 @@ peepdf-virustotal-check:
   script:
     - docker pull cincan/peepdf
       #- /bin/bash peepdf-vt.sh
-    - docker run -v ${PWD}/pdf:/pdf-source/pdf --entrypoint "/bin/bash" cincan/peepdf peepdf-vt.sh
+    - docker run -v ${PWD}:/pdf-source --entrypoint "/bin/bash" cincan/peepdf /pdf-source/peepdf-vt.sh
   artifacts:
     name: output-files
   only:
