@@ -1,8 +1,16 @@
 #!/bin/bash
 #git clone results output-files
 
-#OUTPUTPATH=$(pwd)/output-files/results
-OUTPUTPATH=$(pwd)/results
+which ssh-agent || (apk add --update openssh-client)
+eval $(ssh-agent -s)
+mkdir -p ~/.ssh
+echo "$SSH_PRIV_KEY" | ssh-add -
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+git config --global user.email "$GITLAB_USER_EMAIL"
+git config --global user.name  "$GITLAB_USER_ID"
+git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+
+OUTPUTPATH=$(pwd)/output-files/results
 ORIGSAMPLESPATH=$(pwd)
 
 # Do nothing if folder is empty
@@ -11,28 +19,24 @@ ORIGSAMPLESPATH=$(pwd)
 else
 	for folder in $ORIGSAMPLESPATH/results/shellcode/*/
 	  do
-	  printf "Working on folder: "${folder}"\n" >> $OUTPUTPATH/sctest_log
+	    printf "Working on folder: "${folder}"\n" >> $OUTPUTPATH/sctest_log
 
-	  SAMPLESPATH=${folder%?}
-	  cd /peepdf
+	    SAMPLESPATH=${folder%?}
+	    cd /peepdf
 
-	  for file in $SAMPLESPATH/*
-	    do
-	    xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
-		  echo $(basename $SAMPLESPATH)/$xbase Results: >> $OUTPUTPATH/sctest_log
-      #docker run -v ${ORIGSAMPLESPATH}:/sctest cincan/peepdf /sctest/${xbase} -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
-      /usr/bin/python peepdf.py $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
+	    for file in $SAMPLESPATH/*
+	        do
+	        xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
+
+		echo $(basename $SAMPLESPATH)/$xbase Results: >> $OUTPUTPATH/sctest_log
+		/usr/bin/python peepdf.py $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
 	  done
 	done
 
 
 	# Update git
 	cat $OUTPUTPATH/sctest_log
-	cd $ORIGSAMPLESPATH
-  #cd $ORIGSAMPLESPATH/output-files
+	cd $ORIGSAMPLESPATH/output-files
 	git add .
-#	git config --global user.name "${GITLAB_USER_ID}"
-#	git config --global user.email "${GITLAB_USER_EMAIL}"
-  git status
-  git commit -m "[skip ci] Results update"
+	git commit -m "[skip ci] Results update"
 fi
