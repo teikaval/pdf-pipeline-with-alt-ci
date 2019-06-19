@@ -11,7 +11,7 @@ if [ "$number_of_files" == 0 ]; then
 else
 	# Scan the files
 	echo "Processing files"
-	cd /pdfid
+	#cd /pdfid
 	ls -R
 	for file in $SAMPLESPATH/pdf/*
   #for file in $SAMPLESPATH/pdf-source/pdf/*
@@ -20,8 +20,8 @@ else
 	  echo Analysing: ${file##*/}
 	  hash=$(md5sum "${file}" | cut -d ' ' -f1)
 	        #/usr/bin/python pdfid.py $file -p plugin_triage pdf-source/pdf/*.* > result
-	  /usr/bin/python pdfid.py $file -p plugin_triage pdf/*.* > result
-		      #docker run cincan/pdfid $file -p plugin_triage pdf/*.* > result
+	  #/usr/bin/python pdfid.py $file -p plugin_triage pdf/*.* > result
+		docker run cincan/pdfid $file -p plugin_triage pdf/*.* > result
     if (cat result | tee -a $SAMPLESPATH/pdfid.log | grep -c 1.00);then
 	    echo $hash --- ${file##*/} >> $SAMPLESPATH/pdfid-malicious.log
 	    echo "Likely malicious"

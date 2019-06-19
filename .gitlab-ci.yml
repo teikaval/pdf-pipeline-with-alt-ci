@@ -30,11 +30,11 @@ show-files:
 
 pdfid:
   stage: stage-1-scan
-  image: 
-    name: cincan/pdfid
-    entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
+  #image: 
+  #  name: cincan/pdfid
+  #  entrypoint: ["/usr/bin/python","pdfid/pdfid.py"]
   script:
-    #    - docker pull cincan/pdfid
+    - docker pull cincan/pdfid
     - /bin/bash pdfid.sh
   only:
     - pdf-source
@@ -43,11 +43,11 @@ pdfid:
 
 peepdf-virustotal-check:
   stage: stage-1-scan
-  image: 
-    name: cincan/peepdf
-    entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
+  #image: 
+  #  name: cincan/peepdf
+  #  entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
   script:
-    #- docker pull cincan/peepdf
+    - docker pull cincan/peepdf
     - /bin/bash peepdf-vt.sh
   artifacts:
     name: output-files
@@ -57,13 +57,13 @@ peepdf-virustotal-check:
 jsunpackn:
   stage: stage-2-scan
   dependencies: [pdfid]
-  image: 
-    name: cincan/jsunpack-n
-    entrypoint: ["/usr/bin/python","/jsunpack-n/jsunpackn.py"]
+  #image: 
+  #  name: cincan/jsunpack-n
+  #  entrypoint: ["/usr/bin/python","/jsunpack-n/jsunpackn.py"]
   script:
-    #    - apk add --no-cache python3
+    - apk add --no-cache python3
     #- apt-get install python3
-    #- docker pull cincan/jsunpack-n
+    - docker pull cincan/jsunpack-n
     - /bin/bash jsunpackn.sh
   artifacts:
     name: output-files
@@ -73,11 +73,11 @@ jsunpackn:
 job-sctest:
   stage: stage-3-scan
   dependencies: [jsunpackn]
-  image: 
-    name: cincan/peepdf
-    entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
+  #image: 
+  #  name: cincan/peepdf
+  #  entrypoint: ["/usr/bin/python","/peepdf/peepdf.py"]
   script:
-    #- docker pull cincan/peepdf
+    - docker pull cincan/peepdf
     - /bin/bash sctest.sh
     - git push origin HEAD:master
   artifacts:
