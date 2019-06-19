@@ -21,16 +21,16 @@ else
 	# Update the results-git
 	cd $SAMPLESPATH
 	ls $SAMPLESPATH -R
-	git clone results output-files
+	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
 	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
 
-	git pull
-	git add .
-	git config --global user.name "cincan-pipeline"
-	git config --global user.email "cincan@concourse"
-	git commit -m "update peepdf results"
+	#git pull
+	#git add .
+	#git config --global user.name "cincan-pipeline"
+	#git config --global user.email "cincan@concourse"
+	#git commit -m "update peepdf results"
 
 fi
 

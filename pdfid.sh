@@ -32,7 +32,7 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	ls $SAMPLESPATH -R
+	ls $SAMPLESPATH
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
@@ -50,4 +50,3 @@ else
 	#git config --global user.email "cincan@concourse"
 	#git commit -m "update pdfid results"
 fi
-
