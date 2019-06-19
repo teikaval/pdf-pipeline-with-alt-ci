@@ -20,7 +20,7 @@ else
 	    do
 	    xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
 		  echo $(basename $SAMPLESPATH)/$xbase Results: >> $OUTPUTPATH/sctest_log
-      docker run cincan/peepdf $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
+      docker run -v ${ORIGSAMPLESPATH}:/sctest cincan/peepdf /sctest/${xbase} -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
       #/usr/bin/python peepdf.py $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
 	  done
 	done

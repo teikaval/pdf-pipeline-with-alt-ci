@@ -1,26 +1,20 @@
 #!/bin/bash
 #git clone results output-files
 SAMPLESPATH=$(pwd)
-set -xeu
-cd /jsunpack-n
+#cd /jsunpack-n
 
 #if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 if [[ "$(ls $SAMPLESPATH/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
 	#for file in $SAMPLESPATH/pdf-source/pdf/*
-  ls $SAMPLESPATH/pdf
 	for file in $SAMPLESPATH/pdf/*
 	  do
 	  echo "Processing $file ..."
 	  xbase=${file##*/};xfext=${xbase##*.};xpref=${xbase%.*}
 	  #/usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/
     cd $SAMPLESPATH/pdf
-    #export temp_path_file=`python3 -c 'import os; filepath=os.path.join(os.getcwd(),os.listdir()[0]); print(filepath)'`
-    #export temp_file=`python3 -c 'import os; filepath=os.listdir(os.getcwd())[0]; print(filepath)'`    
-    
-    docker run cincan/jsunpack-n ${file} -d $SAMPLESPATH/shellcode/${xpref}.${xfext}/
-    #docker run cincan/jsunpack-n "${xbase}" -d $SAMPLESPATH/shellcode/${xpref}.${xfext}/
+    docker run -v ${SAMPLESPATH}:/jsunpack-n/ cincan/jsunpack-n /jsunpack-n/${xbase} 
     #/usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/shellcode/${xpref}.${xfext}/
 	  #echo "output folder: $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/"
 	  echo "output folder: $SAMPLESPATH/shellcode/${xpref}.${xfext}/"
