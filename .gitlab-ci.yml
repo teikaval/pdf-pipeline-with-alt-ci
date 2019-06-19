@@ -37,7 +37,7 @@ pdfid:
   # entrypoint: ["/bin/sh"]
   script:
     - docker pull cincan/pdfid
-    - docker run -v "${PWD}:/pdf-source" -e SSH_PRIV_KEY=${SSH_PRIV_KEY} -e GITLAB_USER_EMAIL=${GITLAB_USER_EMAIL} -e GITLAB_USER_ID=${GITLAB_USER_ID} --entrypoint "/bin/sh" --name cincan/pdfid /pdf-source/pdfid.sh
+    - docker run -v "${PWD}:/pdf-source" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/sh" --name cincan/pdfid /pdf-source/pdfid.sh
   only:
     - pdf-source
   artifacts:
