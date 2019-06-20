@@ -74,4 +74,39 @@ void ExitProcess (
 [0mpdf-with-shellcode.pdf/shellcode_d8bd443a440266a999b38bcd0f848e986a3b12b2 Results:
 [0mpdf-with-shellcode.pdf/shellcode_f787a2358b8737c847156313e8de1fa7f0994b1b Results:
 [0mpdf-with-shellcode.pdf/shellcode_fe4042ba23557b882aa85a662534b4f074a134f3 Results:
+[0mWorking on folder: /output-files/results/shellcode/pdf-with-shellcode.pdf
+pdf-with-shellcode.pdf/decoding_1295207ae7326e7824a3ffb7aa18c2b3cced219c Results:
+[0mpdf-with-shellcode.pdf/decoding_f7e4352cc1d0a86293037eb37564842233b98ae1 Results:
+[0mpdf-with-shellcode.pdf/original_edd629b4268281ea92537f3a13cb9e76d1b959b8 Results:
+[0mpdf-with-shellcode.pdf/shellcode_135a48a8252baa49270157f8bf55b32c4566607f Results:
+[0mpdf-with-shellcode.pdf/shellcode_391052cad79bf31cb2677ba9e501a20cac0e07bf Results:
+
+UINT WINAPI WinExec (
+     LPCSTR = 0x01372ec0 => 
+           = "häijy-exe.exe";
+     UINT uCmdShow = 1;
+) =  0x20;
+DWORD WINAPI GetVersion (
+) =  0xa280105;
+void ExitProcess (
+     UINT uExitCode = 0;
+) =  0x0;
+
+[0mpdf-with-shellcode.pdf/shellcode_93e4352a8ca0dd6babf771e47b9ca78bb68bc85a Results:
+
+UINT WINAPI WinExec (
+     LPCSTR = 0x01ab3d20 => 
+           = "häijy-exe.exe";
+     UINT uCmdShow = 1;
+) =  0x20;
+DWORD WINAPI GetVersion (
+) =  0xa280105;
+void ExitProcess (
+     UINT uExitCode = 0;
+) =  0x0;
+
+[0mpdf-with-shellcode.pdf/shellcode_b3190e095e9c25ef29f7b382fb540d4e592a3e19 Results:
+[0mpdf-with-shellcode.pdf/shellcode_d8bd443a440266a999b38bcd0f848e986a3b12b2 Results:
+[0mpdf-with-shellcode.pdf/shellcode_f787a2358b8737c847156313e8de1fa7f0994b1b Results:
+[0mpdf-with-shellcode.pdf/shellcode_fe4042ba23557b882aa85a662534b4f074a134f3 Results:
 [0m
