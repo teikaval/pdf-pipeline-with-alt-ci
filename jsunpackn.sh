@@ -15,12 +15,12 @@ SAMPLESPATH=$(pwd)
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
+  mkdir -p $SAMPLESPATH/output-files/results/shellcode && touch $SAMPLESPATH/output-files/results/shellcode/.gitkeep
   cd $SAMPLESPATH/output-files
   git init
+  echo "before adding remote"
   git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
-  #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   git pull origin master
-  mkdir -p $SAMPLESPATH/output-files/results/shellcode && touch $SAMPLESPATH/output-files/results/shellcode/.gitkeep
   cd /jsunpack-n
 	for file in $SAMPLESPATH/pdf-source/pdf/*
 	  do
@@ -34,6 +34,7 @@ else
 	cd $SAMPLESPATH/output-files
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
+  echo "before pushing changes"
   git push -u origin master
 fi
 
