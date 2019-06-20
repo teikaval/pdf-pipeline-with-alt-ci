@@ -16,6 +16,8 @@ git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.
 git pull origin master
 OUTPUTPATH=$(pwd)/results
 
+ls $OUTPUTPATH -R
+
 # Do nothing if folder is empty
  #if [[ "$(ls $ORIGSAMPLESPATH/results/shellcode |wc -l)" == 0 ]]; then
  if [[ "$(ls $OUTPUTPATH/shellcode |wc -l)" == 0 ]]; then

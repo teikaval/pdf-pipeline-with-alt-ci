@@ -83,8 +83,6 @@ job-sctest:
     - docker pull cincan/peepdf
       #- /bin/bash sctest.sh
     - docker run -v "${PWD}":/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/bash" cincan/peepdf /pdf-source/sctest.sh
-    - git status
-    #- git push origin HEAD:master
   artifacts:
     name: output-files
   only:

@@ -27,7 +27,7 @@ else
 	  echo "Processing $file ..."
 	  xbase=${file##*/};xfext=${xbase##*.};xpref=${xbase%.*}
 	  echo ${xpref}.${xfext}
-	  /usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/
+	  /usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/results/shellcode/${xpref}.${xfext}/
 	  echo "output folder: $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/"
 	done
 
