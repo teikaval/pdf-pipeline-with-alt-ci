@@ -12,7 +12,6 @@ git config --global user.name  "$GITLAB_USER_ID"
 #git clone results output-files
 SAMPLESPATH=$(pwd)
 
-
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
@@ -22,6 +21,7 @@ else
   git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   #git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   git pull origin master
+  mkdir -p $SAMPLESPATH/output-files/shellcode && touch $SAMPLESPATH/output-files/shellcode/.gitkeep
   cd /jsunpack-n
 	for file in $SAMPLESPATH/pdf-source/pdf/*
 	  do
