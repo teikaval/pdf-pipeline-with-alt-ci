@@ -12,9 +12,7 @@ git config --global user.name  "$GITLAB_USER_ID"
 #git clone results output-files
 SAMPLESPATH=$(pwd)
 
-ls $SAMPLESPATH -la
-ls $samplespath/pdf-source -la
-ls $SAMPLESPATH/pdf-source/pdf -la
+ls $samplespath/pdf-source -alR
 
 
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
