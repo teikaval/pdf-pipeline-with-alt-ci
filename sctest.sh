@@ -14,6 +14,7 @@ mkdir -p $(pwd)/output-files/results/shellcode && cd $SAMPLESPATH/output-files
 git init
 git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master
+
 OUTPUTPATH=$(pwd)/results
 
 # Do nothing if folder is empty
@@ -42,6 +43,7 @@ else
 	# Update git
 	cat $OUTPUTPATH/sctest_log
 	cd $ORIGSAMPLESPATH/output-files
+	ls -R
 	git add .
 	git commit -m "[skip ci] Results update"
   git push -u origin master
