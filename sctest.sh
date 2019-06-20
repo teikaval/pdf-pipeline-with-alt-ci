@@ -9,12 +9,12 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 git config --global user.email "$GITLAB_USER_EMAIL"
 git config --global user.name  "$GITLAB_USER_ID"
 
+ORIGSAMPLESPATH=$(pwd)
 mkdir -p $(pwd)/output-files/results/shellcode && cd $SAMPLESPATH/output-files
 git init
 git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master
-OUTPUTPATH=$(pwd)/output-files/results
-ORIGSAMPLESPATH=$(pwd)
+OUTPUTPATH=$(pwd)/results
 
 # Do nothing if folder is empty
  #if [[ "$(ls $ORIGSAMPLESPATH/results/shellcode |wc -l)" == 0 ]]; then
