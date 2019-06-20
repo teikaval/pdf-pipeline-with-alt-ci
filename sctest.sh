@@ -25,7 +25,7 @@ else
 	  do
 	    printf "Working on folder: ${folder}\n" >> $OUTPUTPATH/sctest_log
 
-	    SAMPLESPATH=${folder%?}
+	    SAMPLESPATH=${folder}
 			echo "folder name: ${folder%?}"
 	    cd /peepdf
 
