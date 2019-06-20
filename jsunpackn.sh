@@ -15,9 +15,10 @@ SAMPLESPATH=$(pwd)
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
-  mkdir -p $SAMPLESPATH/output-files/results
+  mkdir -p $SAMPLESPATH/output-files
   cd $SAMPLESPATH/output-files
-  git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+  git init
+  git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   git pull origin master
   cd /jsunpack-n
 	for file in $SAMPLESPATH/pdf-source/pdf/*
@@ -25,13 +26,13 @@ else
 	  echo "Processing $file ..."
 	  xbase=${file##*/};xfext=${xbase##*.};xpref=${xbase%.*}
 	  echo ${xpref}.${xfext}
-	  /usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/
+	  /usr/bin/python jsunpackn.py $file -d $SAMPLESPATH/output-files/results/shellcode/${xpref}.${xfext}/
 	  echo "output folder: $SAMPLESPATH/output-files/shellcode/${xpref}.${xfext}/"
 	done
 
 	cd $SAMPLESPATH/output-files
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
-  git push origin HEAD:master
+  git push -u origin master
 fi
 

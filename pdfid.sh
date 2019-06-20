@@ -13,7 +13,9 @@ SAMPLESPATH=$(pwd)
 ls $SAMPLESPATH/pdf-source/ -R
 mkdir -p $SAMPLESPATH/output-files/results
 cd $SAMPLESPATH/output-files
-git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+#git remote set-url --push origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+git init
+git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
 git pull origin master
 number_of_files=$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)
 if [[ "$number_of_files" == 0 ]]; then
@@ -44,7 +46,7 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	ls $SAMPLESPATH/output-files -R
+	ls $SAMPLESPATH
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
@@ -56,8 +58,8 @@ else
         echo "Requires further analysis: "$(wc -l $SAMPLESPATH/pdfid-requires-more-analysis.log| cut -d ' ' -f1) | tee -a $SAMPLESPATH/pdfid.log
 	echo "number of samples: $number_of_files" | tee -a $SAMPLESPATH/pdfid.log
 
-	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
+	mv $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
 	git add .
 	git commit -m "[skip ci] update pdfid results"
-  git push origin HEAD:master
+  git push -u origin master
 fi
