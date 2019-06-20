@@ -12,12 +12,6 @@ git config --global user.name  "$GITLAB_USER_ID"
 #git clone results output-files
 SAMPLESPATH=$(pwd)
 
-ls $SAMPLESPATH/pdf-source -R
-echo "..............................."
-ls $SAMPLESPATH/pdf-source/pdf -alR
-echo "************************"
-ls pdf-source/pdf -alR
-
 
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
