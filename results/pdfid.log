@@ -1,42 +1,15 @@
-PDFiD 0.2.5 //pdf-source/pdf/pdf-with-shellcode.pdf
+PDFiD 0.2.5 //pdf-source/pdf/buchman2016tendermint.pdf
  PDF Header: %PDF-1.5
- obj                    6
- endobj                 6
- stream                 1
- endstream              1
- xref                   1
- trailer                1
+ obj                  417
+ endobj               417
+ stream               416
+ endstream            416
+ xref                   0
+ trailer                0
  startxref              1
- /Page                  1(1)
+ /Page                  0
  /Encrypt               0
- /ObjStm                0
- /JS                    1(1)
- /JavaScript            1(1)
- /AA                    0
- /OpenAction            1(1)
- /AcroForm              0
- /JBIG2Decode           0
- /RichMedia             0
- /Launch                0
- /EmbeddedFile          0
- /XFA                   0
- /URI                   0
- /Colors > 2^24         0
-
-Triage plugin score:        1.00
-Triage plugin instructions: Sample is likely malicious and requires further analysis
-PDFiD 0.2.5 //pdf-source/pdf/test.pdf
- PDF Header: %PDF-1.3
- obj                  375
- endobj               375
- stream               138
- endstream            138
- xref                   1
- trailer                1
- startxref              1
- /Page                 56
- /Encrypt               0
- /ObjStm                0
+ /ObjStm                4
  /JS                    0
  /JavaScript            0
  /AA                    0
@@ -50,10 +23,10 @@ PDFiD 0.2.5 //pdf-source/pdf/test.pdf
  /URI                   0
  /Colors > 2^24         0
 
-Triage plugin score:        0.00
-Triage plugin instructions: Sample is likely not malicious, unless you suspect this is used in a targeted/sophisticated attack
+Triage plugin score:        0.75
+Triage plugin instructions: /ObjStm detected, analyze sample with pdfid-objstm.bat
 Results:
-Malicious: 1
-Clean: 1
-Requires further analysis: 
-number of samples: 2
+Malicious: 
+Clean: 
+Requires further analysis: 1
+number of samples: 1
