@@ -1,3 +1,36 @@
+File: pdf-with-shellcode.pdf
+MD5: b8f03f1896b14e79382c6670d6e2342c
+SHA1: edd629b4268281ea92537f3a13cb9e76d1b959b8
+SHA256: d384946d9ab39ac83161ab304ab0cbf36f0db41843ab6f4a0e360eb2a00c5f1c
+Size: 6604 bytes
+Detection: File not found on VirusTotal
+Version: 1.5
+Binary: True
+Linearized: False
+Encrypted: False
+Updates: 0
+Objects: 6
+Streams: 1
+URIs: 0
+Comments: 0
+Errors: 0
+
+Version 0:
+	Catalog: 1
+	Info: No
+	Objects (6): [1, 2, 3, 4, 5, 6]
+		Errors (1): [6]
+	Streams (1): [6]
+		Encoded (1): [6]
+	Objects with JS code (1): [6]
+	Suspicious elements:
+		/OpenAction (1): [1]
+		/JS (1): [5]
+		/JavaScript (1): [5]
+		util.printf (CVE-2008-2992) (1): [6]
+
+
+
 File: test.pdf
 MD5: e8a40d0be06ebec9a73b235f68382ba1
 SHA1: 45025b5eda6563cc353a218270342d8b5177f39d
