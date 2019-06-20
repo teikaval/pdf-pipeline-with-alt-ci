@@ -46,7 +46,7 @@ else
 
 	# Update the results-git
 	cd $SAMPLESPATH
-	ls $SAMPLESPATH/output-files -R
+	ls $SAMPLESPATH
 	#git clone results output-files
 
 	cd $SAMPLESPATH/output-files
@@ -58,7 +58,7 @@ else
         echo "Requires further analysis: "$(wc -l $SAMPLESPATH/pdfid-requires-more-analysis.log| cut -d ' ' -f1) | tee -a $SAMPLESPATH/pdfid.log
 	echo "number of samples: $number_of_files" | tee -a $SAMPLESPATH/pdfid.log
 
-	cp $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
+	mv $SAMPLESPATH/*.log $SAMPLESPATH/output-files/results/
 	git add .
 	git commit -m "[skip ci] update pdfid results"
   git push -u origin master

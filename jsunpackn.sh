@@ -35,6 +35,7 @@ else
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
   echo "before pushing changes"
+  git pull origin master
   git push -u origin master
 fi
 
