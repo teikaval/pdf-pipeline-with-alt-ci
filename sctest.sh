@@ -12,6 +12,10 @@ git config --global user.name  "$GITLAB_USER_ID"
 OUTPUTPATH=$(pwd)/output-files/results
 ORIGSAMPLESPATH=$(pwd)
 
+ls $ORIGSAMPLESPATH -la
+ls $ORIGSAMPLESPATH/output-files -la
+ls $OUTPUTPATH -la
+
 # Do nothing if folder is empty
  if [[ "$(ls $ORIGSAMPLESPATH/results/shellcode |wc -l)" == 0 ]]; then
 	echo "Folder is empty"
