@@ -26,7 +26,6 @@ else
 	    printf "Working on folder: ${folder}\n" >> $OUTPUTPATH/sctest_log
 
 	    SAMPLESPATH=${folder}
-			echo "folder name: ${folder%?}"
 	    cd /peepdf
 
 	    for file in $SAMPLESPATH/*
@@ -34,7 +33,6 @@ else
 	        xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
 
 		echo $(basename $SAMPLESPATH)/$xbase Results: >> $OUTPUTPATH/sctest_log
-		echo "file name: ${file}"
 		/usr/bin/python peepdf.py $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
 	  done
 	done
