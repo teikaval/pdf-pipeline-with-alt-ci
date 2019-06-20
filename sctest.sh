@@ -16,8 +16,6 @@ git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.
 git pull origin master
 OUTPUTPATH=$(pwd)/results
 
-ls $OUTPUTPATH -R
-
 # Do nothing if folder is empty
  #if [[ "$(ls $ORIGSAMPLESPATH/results/shellcode |wc -l)" == 0 ]]; then
  if [[ "$(ls $OUTPUTPATH/shellcode |wc -l)" == 0 ]]; then
@@ -25,9 +23,10 @@ ls $OUTPUTPATH -R
 else
   for folder in $OUTPUTPATH/shellcode/*
 	  do
-	    printf "Working on folder: "${folder}"\n" >> $OUTPUTPATH/sctest_log
+	    printf "Working on folder: ${folder}\n" >> $OUTPUTPATH/sctest_log
 
 	    SAMPLESPATH=${folder%?}
+			echo ${folder%?}
 	    cd /peepdf
 
 	    for file in $SAMPLESPATH/*
@@ -35,10 +34,12 @@ else
 	        xbase=${file##*/}; xfext=${xbase##*.}; xpref=${xbase%.*}
 
 		echo $(basename $SAMPLESPATH)/$xbase Results: >> $OUTPUTPATH/sctest_log
+		echo $file
 		/usr/bin/python peepdf.py $file -f --command="sctest file ${file}" >> $OUTPUTPATH/sctest_log
 	  done
 	done
 
+	ls $OUTPUTPATH -R
 
 	# Update git
 	cat $OUTPUTPATH/sctest_log

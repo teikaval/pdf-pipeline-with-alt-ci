@@ -15,10 +15,9 @@ SAMPLESPATH=$(pwd)
 if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
-  mkdir -p $SAMPLESPATH/output-files/results/shellcode && touch $SAMPLESPATH/output-files/results/shellcode/.gitkeep
+  mkdir -p $SAMPLESPATH/output-files
   cd $SAMPLESPATH/output-files
   git init
-  echo "before adding remote"
   git remote add origin git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
   git pull origin master
   cd /jsunpack-n
@@ -34,8 +33,6 @@ else
 	cd $SAMPLESPATH/output-files
 	git add .
 	git commit -m "[skip ci] update jsunpack-n results"
-  echo "before pushing changes"
-  git pull origin master
   git push -u origin master
 fi
 
