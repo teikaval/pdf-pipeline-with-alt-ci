@@ -37,7 +37,7 @@ pdfid:
   # entrypoint: ["/bin/sh"]
   script:
     - docker pull cincan/pdfid
-    - docker run -v "${PWD}":/pdfid/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/sh" cincan/pdfid pdf-source/pdfid.sh
+    - docker run -v "${PWD}":/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/sh" cincan/pdfid /pdf-source/pdfid.sh
   only:
     - pdf-source
   artifacts:
@@ -52,7 +52,7 @@ peepdf-virustotal-check:
   script:
     - docker pull cincan/peepdf
       #- /bin/bash peepdf-vt.sh
-    - docker run -v "${PWD}":/peepdf/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/bash" cincan/peepdf pdf-source/peepdf-vt.sh
+    - docker run -v "${PWD}":/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/bash" cincan/peepdf /pdf-source/peepdf-vt.sh
   artifacts:
     name: output-files
   only:
@@ -82,7 +82,7 @@ job-sctest:
   script:
     - docker pull cincan/peepdf
       #- /bin/bash sctest.sh
-    - docker run -v "${PWD}":/peepdf/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/bash" cincan/peepdf pdf-source/sctest.sh
+    - docker run -v "${PWD}":/pdf-source -e CI_PROJECT_NAMESPACE="${CI_PROJECT_NAMESPACE}" -e CI_PROJECT_NAME="${CI_PROJECT_NAME}" -e SSH_PRIV_KEY="${SSH_PRIV_KEY}" -e GITLAB_USER_EMAIL="${GITLAB_USER_EMAIL}" -e GITLAB_USER_ID="${GITLAB_USER_ID}" --entrypoint "/bin/bash" cincan/peepdf /pdf-source/sctest.sh
     - git status
     #- git push origin HEAD:master
   artifacts:
