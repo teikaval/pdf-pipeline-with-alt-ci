@@ -1,0 +1,9 @@
+Gitlab CI
+Buildbot
+Tox
+GoCD
+Drone CI
+Jenkins
+Codefresh
+Buildkite
+CDS
