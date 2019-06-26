@@ -1,0 +1,44 @@
+kind: pipeline
+name: pdf-pipeline
+
+steps:
+- name: show-files
+  image: alpine
+  environment:
+    GIT_SSH_KEY:
+      from_secret: GIT_SSH_KEY
+  commands:
+    - /bin/sh -ex | ls -R
+    - which ssh-agent || (apk add --update openssh-client git)
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - echo "$GIT_SSH_KEY" | ssh-add -
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - git config --global user.email "${DRONE_COMMIT_AUTHOR_EMAIL}"
+    - git config --global user.name "${DRONE_COMMIT_AUTHOR_NAME}"
+    - git remote set-url --push origin "${DRONE_GIT_SSH_URL}"
+    - git pull origin master
+- name: job-pdfid
+  image: cincan/pdfid
+  commands:
+    - ls -R
+    - /bin/sh pdfid.sh
+
+- name: job-peepdf
+  image: cincan/peepdf
+  commands:
+    - ls -R
+    - /bin/bash peepdf-vt.sh
+
+- name: jsunpackn
+  image: cincan/jsunpack-n
+  commands:
+    - /bin/bash jsunpackn.sh
+
+- name: sctest
+  image: cincan/peepdf
+  environment:
+    GIT_SSH_KEY:
+      from_secret: GIT_SSH_KEY
+  commands:
+    - /bin/bash sctest.sh
