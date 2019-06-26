@@ -23,17 +23,20 @@ steps:
   commands:
     - ls -R
     - /bin/sh pdfid.sh
+  depends_on: [show-files]
 
 - name: job-peepdf
   image: cincan/peepdf
   commands:
     - ls -R
     - /bin/bash peepdf-vt.sh
+  depends_on: [show-files]
 
 - name: jsunpackn
   image: cincan/jsunpack-n
   commands:
     - /bin/bash jsunpackn.sh
+  depends_on: [job-pdfid, job-peepdf]
 
 - name: sctest
   image: cincan/peepdf
@@ -42,3 +45,4 @@ steps:
       from_secret: GIT_SSH_KEY
   commands:
     - /bin/bash sctest.sh
+  depends_on: [jsunpackn]
