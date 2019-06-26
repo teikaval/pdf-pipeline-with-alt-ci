@@ -2,7 +2,7 @@ Gitlab CI
 Buildbot
 Tox
 GoCD
-Drone CI
+Drone CI (very fast, more suitable than gitlab-ci and concourse)
 Jenkins
 Codefresh
 Buildkite
