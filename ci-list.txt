@@ -3,7 +3,7 @@ Buildbot
 Tox
 GoCD
 Drone CI (very fast, more suitable than gitlab-ci and concourse)
-Jenkins
+Jenkins (also suit for cincan. come up with declarative pipeline style(love it!))
 Codefresh
 Buildkite
 CDS
