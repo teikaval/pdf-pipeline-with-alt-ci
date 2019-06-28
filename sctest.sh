@@ -1,10 +1,12 @@
 #!/bin/bash
 #git clone results output-files
-git config --global user.email "${DRONE_COMMIT_AUTHOR_EMAIL}"
 eval $(ssh-agent -s)
 mkdir -p ~/.ssh
 echo "$GIT_SSH_KEY" | ssh-add -
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+git remote set-url --push origin $DRONE_GIT_SSH_URL
+git fetch origin master
 
 OUTPUTPATH=$(pwd)/results
 #OUTPUTPATH=$(pwd)/output-files/results
@@ -36,8 +38,8 @@ else
 	cd $ORIGSAMPLESPATH/
 	git add .
   git config --global user.name "${DRONE_COMMIT_AUTHOR_NAME}"
-#	git config --global user.email "${DRONE_COMMIT_AUTHOR_EMAIL}"
+  git config --global user.email "${DRONE_COMMIT_AUTHOR_EMAIL}"
 	git commit -m "[ci skip] Results update"
-  git config --global push.default matching
-  git push
+  #git config --global push.default matching
+  git pusuh origin HEAD:master
 fi

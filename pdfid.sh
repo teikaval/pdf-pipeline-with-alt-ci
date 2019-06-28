@@ -1,11 +1,18 @@
 #!/bin/bash
+
+which ssh-agent || (apk add --update openssh-client git)
+eval $(ssh-agent -s)
+mkdir -p ~/.ssh
+echo "$GIT_SSH_KEY" | ssh-add -
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
 SAMPLESPATH=$(pwd)
 #ls $SAMPLESPATH/pdf-source/ -R
 ls $SAMPLESPATH/pdf/ -R
 git config --global user.email "${DRONE_COMMIT_AUTHOR_EMAI}"
 git config --global user.name "${DRONE_COMMIT_AUTHOR_NAME}"
-#git remote set-url --push origin git@github.com:${DRONE_REPO_NAMESPACE}/${DRONE_REPO_NAME}.git
-#git pull origin master
+git remote set-url --push origin git@github.com:${DRONE_REPO_NAMESPACE}/${DRONE_REPO_NAME}.git
+git fetch origin master
 # Do nothing if folder is empty
 #number_of_files=$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)
 number_of_files=$(ls $SAMPLESPATH/pdf |wc -l)
@@ -56,5 +63,5 @@ else
 	mv $SAMPLESPATH/*.log $SAMPLESPATH/results/
   git add .
 	git commit -m "[ci skip] update pdfid results"
-#  git push origin master
+  git push origin HEAD:master
 fi

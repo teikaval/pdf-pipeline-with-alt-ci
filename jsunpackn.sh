@@ -1,9 +1,17 @@
 #!/bin/bash
 #git clone results output-files
+eval $(ssh-agent -s)
+mkdir -p ~/.ssh
+echo "$GIT_SSH_KEY" | ssh-add -
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
 SAMPLESPATH=$(pwd)
 cd /jsunpack-n
 
-#if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
+git remote set-url --push origin $DRONE_GIT_SSH_URL
+git fetch origin master
+
+if [[ "$(ls $SAMPLESPATH/pdf-source/pdf |wc -l)" == 0 ]]; then  
 if [[ "$(ls $SAMPLESPATH/pdf |wc -l)" == 0 ]]; then  
 	echo "Folder is empty"
 else
